@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
 </head>
 <body>
     <label>Írj be ide egy nevet: </label>
-    <input type="text" name="nev">
+    <input type="text" name="nev" id="nevInput">
     <br>
     <label for="osztaly">Írd be az osztályt: </label>
-    <input type="text" name="osztaly">
+    <input type="text" name="osztaly" id="osztalyInput">
     <br>
     <label for="atlag">Írd be az átlagot:</label>
     <input type="number" name="atlag">
     <button onclick="katt()">Mentés</button>
-    <label id="hiba"></label>
+    
     <table>
         <tr>
             <th>Név</th>
