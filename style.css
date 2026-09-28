@@ -3,6 +3,26 @@ table, th, td {
   border-collapse: collapse;
   font-size: x-large;
 }
+
 td, th{
     padding: 5px;
+}
+
+body{
+    justify-items: center;
+}
+
+#inputok{
+    text-align: center;
+    font-size: large;
+}
+
+#mentesBtn{
+    margin: 10px;
+    font-size: 20px;
+    padding: 8px;
+    background-color: green;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
 }

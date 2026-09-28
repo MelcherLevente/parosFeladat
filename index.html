@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tanulói nyilvántartó rendszer</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
 </head>
 <body>
-    <label>Írj be ide egy nevet: </label>
-    <input type="text" name="nev" id="nevInput">
-    <br>
-    <label for="osztaly">Írd be az osztályt: </label>
-    <input type="text" name="osztaly" id="osztalyInput">
-    <br>
-    <label for="atlag">Írd be az átlagot:</label>
-    <input type="text" name="atlag" id="atlagInput">
-    <button onclick="ujTanuloMentes()">Mentés</button>
+    <div id="inputok">
+        <label>Írj be ide egy nevet: </label>
+        <input type="text" name="nev" id="nevInput">
+        <br>
+        <label for="osztaly">Írd be az osztályt: </label>
+        <input type="text" name="osztaly" id="osztalyInput">
+        <br>
+        <label for="atlag">Írd be az átlagot:</label>
+        <input type="text" name="atlag" id="atlagInput">
+        <br>
+        <button id="mentesBtn" onclick="ujTanuloMentes()">Mentés</button>
+    </div>
     
-    <table>
+    <label id="hiba"></label>
+    <table id="tablazat">
         <tr>
             <th>Név</th>
             <th>Osztály</th>
@@ -27,11 +31,11 @@
             <th>Törlés</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="tanulo_Nev"></td>
+            <td id="tanulo_Osztaly"></td>
+            <td id="tanulo_Atlag"></td>
+            <td><button onclick="modosit()">Módosítás</button></td>
+            <td><button onclick="torles()">Törlés</button></td>
         </tr>
     </table>
     

@@ -1,6 +1,44 @@
-let tanulok = [
+let tanulok=[{
+    nev:"Kiss Anna",
+    osztaly:"12.D",
+    atlag:"3,5"
+},
+{
+    nev: "Tóth Ervin",
+    osztaly:"12.E",
+    atlag:"3,98"
 
-]
+},
+{
+    nev:"Kosztolányi Erzsi",
+    osztaly: "11.D",
+    atlag:"4,23"
+}]
+
+// tablazatba toltes
+function betoltes(){
+    try{
+        nev=document.getElementById("tanulo_Nev").innerHTML=tanulok[0].nev
+        osztaly=document.getElementById("tanulo_Osztaly").innerHTML=tanulok[0].osztaly
+        atlag=document.getElementById("tanulo_Atlag").innerHTML=tanulok[0].atlag
+    }
+    catch(hiba){
+        document.getElementById("hiba").innerHTML="Hiba" + hiba.message
+        console.log(hiba.message)
+    }
+
+}
+betoltes();
+
+
+function inputokUritese(){
+    document.getElementById("nevInput").value = ""
+    document.getElementById("osztalyInput").value = ""
+    document.getElementById("atlagInput").value = ""
+}
+
+
+// uj tanulo mentese
 function ujTanuloMentes(){
     try{
         let nev = document.getElementById("nevInput").value
@@ -28,7 +66,7 @@ function ujTanuloMentes(){
         else{
             tanulok.push({nev: `${nev}`, osztaly: `${osztaly}`, atlag: `${atlag}`})
         }
-        console.log(tanulok[0])
+        inputokUritese()
     }
     catch(error){
         console.log(error)
