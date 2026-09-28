@@ -16,7 +16,7 @@
     <label for="atlag">Írd be az átlagot:</label>
     <input type="number" name="atlag">
     <button onclick="katt()">Mentés</button>
-    
+    <label id="hiba"></label>
     <table>
         <tr>
             <th>Név</th>
@@ -26,14 +26,14 @@
             <th>Törlés</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="tanulo_Nev"></td>
+            <td id="tanulo_Osztaly"></td>
+            <td id="tanulo_Atlag"></td>
+            <td><button onclick="modosit()">Módosítás</button></td>
+            <td><button onclick="torles()">Törlés</button></td>
         </tr>
     </table>
     
-    
+<script src="main.js"></script>
 </body>
 </html>
