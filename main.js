@@ -1,4 +1,4 @@
-let tanulok=[{
+var tanulok=[{
     nev:"Kiss Anna",
     osztaly:"12.D",
     atlag:"3,5"
