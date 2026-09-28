@@ -1,0 +1,6 @@
+let tanulok = {
+
+}
+function katt(){
+    
+}
