@@ -16,8 +16,20 @@ var tanulok=[{
 }]
 // search bar
 function searchbar(){
-    const search=document.getElementById("search")
+    let searchinput=document.getElementById("search").value
+    searchinput=searchinput.toLowerCase();
+    let searchnev=document.getElementById("tanulo_Nev");
+
+    for(let i=0; i<searchnev.length;i++){
+        if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
+            document.getElementById("search-results").innerHTML="Nem talált"
+        }
+        else{
+            document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
+        }
+    }
 }
+searchbar();
 
 // tablazatba toltes
 var inputForm = document.getElementById("inputForm")
