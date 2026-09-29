@@ -20,20 +20,37 @@ function searchbar(){
 }
 
 // tablazatba toltes
-function betoltes(){
+var inputForm = document.getElementById("inputForm")
+function betoltes(adat){
     try{
-        nev=document.getElementById("tanulo_Nev").innerHTML=tanulok[0].nev
-        osztaly=document.getElementById("tanulo_Osztaly").innerHTML=tanulok[0].osztaly
-        atlag=document.getElementById("tanulo_Atlag").innerHTML=tanulok[0].atlag
+        const tablazatTorzs = document.getElementById("tablazatTorzs")
+        const tablazatSor = adat.map(tanulo => `
+            <tr>
+                <td>${tanulo.nev}</td>
+                <td>${tanulo.osztaly}</td>
+                <td>${tanulo.atlag}</td>
+                <td>${tanulo.atlag}</td>
+                <td>${tanulo.atlag}</td>
+            </tr>`).join('')
+        tablazatTorzs.innerHTML = tablazatSor
     }
     catch(hiba){
-        document.getElementById("hiba").innerHTML="Hiba" + hiba.message
-        console.log(hiba.message)
+        // document.getElementById("hiba").innerHTML="Hiba" + hiba.message
+        // console.log(hiba.message)
     }
 
-}
-betoltes();
+    inputForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        
+        ujTanuloMentes()
 
+        betoltes(tanulok)
+
+        inputokUritese()
+    })
+}
+
+betoltes(tanulok);
 
 function inputokUritese(){
     document.getElementById("nevInput").value = ""
@@ -73,6 +90,6 @@ function ujTanuloMentes(){
         inputokUritese()
     }
     catch(error){
-        console.log(error)
+        document.getElementById("hiba").innerHTML = error
     }
 }
