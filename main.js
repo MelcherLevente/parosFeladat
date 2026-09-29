@@ -14,6 +14,10 @@ var tanulok=[{
     osztaly: "11.D",
     atlag:"4,23"
 }]
+// search bar
+function searchbar(){
+    const search=document.getElementById("search")
+}
 
 // tablazatba toltes
 function betoltes(){
