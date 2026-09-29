@@ -8,7 +8,7 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <div id="inputok">
+    <form id="inputForm">
         <label>Írj be ide egy nevet: </label>
         <input type="text" name="nev" id="nevInput">
         <br>
@@ -18,25 +18,31 @@
         <label for="atlag">Írd be az átlagot:</label>
         <input type="text" name="atlag" id="atlagInput">
         <br>
-        <button id="mentesBtn" onclick="ujTanuloMentes()">Mentés</button>
-    </div>
+        <button type="submit" id="mentesBtn" onclick="ujTanuloMentes()">Mentés</button>
+        <br>
+        <label id="hiba"></label>
+    </form>
     
-    <label id="hiba"></label>
+    
     <table id="tablazat">
-        <tr>
-            <th>Név</th>
-            <th>Osztály</th>
-            <th>Átlag</th>
-            <th>Módosítás</th>
-            <th>Törlés</th>
-        </tr>
-        <tr>
-            <td id="tanulo_Nev"></td>
-            <td id="tanulo_Osztaly"></td>
-            <td id="tanulo_Atlag"></td>
-            <td><button onclick="modosit()">Módosítás</button></td>
-            <td><button onclick="torles()">Törlés</button></td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Osztály</th>
+                <th>Átlag</th>
+                <th>Módosítás</th>
+                <th>Törlés</th>
+            </tr>
+        </thead>
+        <tbody id="tablazatTorzs">
+            <tr>
+                <td id="tanulo_Nev"></td>
+                <td id="tanulo_Osztaly"></td>
+                <td id="tanulo_Atlag"></td>
+                <td><button onclick="modosit()">Módosítás</button></td>
+                <td><button onclick="torles()">Törlés</button></td>
+            </tr>
+        </tbody>
     </table>
     
 <script src="main.js"></script>
