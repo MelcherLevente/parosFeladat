@@ -18,31 +18,26 @@ function searchbar(){
     let searchinput=document.getElementById("search").value.toLowerCase();
     
     let rows=document.getElementById("tablazatTorzs").rows;
-    let talalat=false;
+    let talalatok=[];
 
     for(let i=0; i<rows.length;i++){
         let namecell=rows[i].getElementsByClassName("tanulo_Nev")[0];
         if(namecell){
              let nametext=namecell.textContent.toLowerCase();
              if(nametext.includes(searchinput)){
-                rows[i].style.display=""
-                talalat=true
+                rows[i].style.display="";
+                if(searchinput!==""){
+                    talalatok.push(namecell.textContent);
+                }
+             } else {
+                rows[i].style.display="none";
              }
-        }
-        else{
+        } else {
             rows[i].style.display="none"
         }
-        
-            
-        
     }
-    let resultsDiv=document.getElementById("search-results");
-    if(!talalat && searchinput!==""){
-        resultsDiv.innerHTML="Nincs találat!"
-    }
-    else{
-        resultsDiv.innerHTML="";
-    }
+
+    
 }
 searchbar();
 
@@ -53,7 +48,7 @@ function betoltes(adat){
         const tablazatTorzs = document.getElementById("tablazatTorzs")
         const tablazatSor = adat.map((tanulo, index) => `
             <tr>
-                <td>${tanulo.nev}</td>
+                <td class="tanulo_Nev">${tanulo.nev}</td>
                 <td>${tanulo.osztaly}</td>
                 <td>${tanulo.atlag}</td>
                 <td><button id="modBtn" onclick="modositas(${index})">Módosítás</button></td>
