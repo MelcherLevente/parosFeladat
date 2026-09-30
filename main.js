@@ -14,21 +14,21 @@ var tanulok=[{
     atlag:"4,23"
 }]
 // search bar
-function searchbar(){
-    let searchinput=document.getElementById("search").value.toLowerCase();
+// function searchbar(){
+//     let searchinput=document.getElementById("search").value.toLowerCase();
     
-    let searchnev=document.getElementById("tanulo_Nev");
+//     let searchnev=document.getElementById("tanulo_Nev");
 
-    for(let i=0; i<searchnev.length;i++){
-        if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
-            document.getElementById("search-results").innerHTML="Nem talált"
-        }
-        else{
-            document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
-        }
-    }
-}
-searchbar();
+//     for(let i=0; i<searchnev.length;i++){
+//         if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
+//             document.getElementById("search-results").innerHTML="Nem talált"
+//         }
+//         else{
+//             document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
+//         }
+//     }
+// }
+// searchbar();
 
 // tablazatba toltes
 function betoltes(adat){
@@ -43,6 +43,7 @@ function betoltes(adat){
         </tr>`).join('')
 
     tablazatTorzs.innerHTML = tablazatSor
+    letszamKiirasa()
 }
 
 betoltes(tanulok);
@@ -126,4 +127,8 @@ function torles(index){
         szerkesztesIndex--
     }
     betoltes(tanulok)
+}
+
+function letszamKiirasa(){
+    document.getElementById("letszam").textContent = `Tanulók száma: ${tanulok.length}`
 }
