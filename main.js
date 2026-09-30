@@ -1,17 +1,17 @@
 var tanulok=[{
     nev:"Kiss Anna",
     osztaly:"12.D",
-    atlag:"3,5"
+    atlag:"3.5"
 },
 {
     nev: "Tóth Ervin",
     osztaly:"12.E",
-    atlag:"3,98"
+    atlag:"3.98"
 },
 {
     nev:"Kosztolányi Erzsi",
     osztaly: "11.D",
-    atlag:"4,23"
+    atlag:"4.23"
 }]
 // search bar
 // function searchbar(){
@@ -43,6 +43,7 @@ function betoltes(adat){
         </tr>`).join('')
 
     tablazatTorzs.innerHTML = tablazatSor
+
     letszamKiirasa()
 }
 
@@ -69,8 +70,8 @@ function ujTanuloMentes(){
         let osztaly = document.getElementById("osztalyInput").value
         let atlag = document.getElementById("atlagInput").value
         let regexNev = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/
-        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[a-zA-Z]$/
-        let regexAtlag = /^(?:[1-4](?:,\d+)?|5(?:,0+)?)$/
+        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[A-Z]$/
+        let regexAtlag = /^(?:[1-4](?:\.\d+)?|5(?:\.0+)?)$/
 
         if(nev == ""){
             throw new Error("Add meg a tanuló nevét!")
@@ -85,7 +86,7 @@ function ujTanuloMentes(){
             throw new Error("Add meg a tanuló osztályát!")
         }
         else if(!regexAtlag.test(atlag)){
-            throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4,75, és 1-5 között kell lennie!")
+            throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4.75, és 1-5 között kell lennie!")
         }
         else{
             const tanulo = {nev: nev, osztaly: osztaly, atlag: atlag}
@@ -131,4 +132,28 @@ function torles(index){
 
 function letszamKiirasa(){
     document.getElementById("letszam").textContent = `Tanulók száma: ${tanulok.length}`
+}
+
+function osztalyAtlag(){
+    let osztaly = document.getElementById("osztaly").value
+    document.getElementById("osztaly").value = ""
+    try{
+        let atlagok = 0;
+        let letszam = 0;
+        tanulok.map((tanulo) => {
+            if(tanulo.osztaly == osztaly){
+                atlagok += Number(tanulo.atlag)
+                letszam++
+            }
+        })
+        if(atlagok == 0){
+            throw new Error("Nincs ilyen osztályú tanuló!")
+        }
+        else{
+            document.getElementById("osztalyAtlag").textContent = `A(z) ${osztaly} osztály átlaga: ${String(atlagok/letszam)}`
+        }
+    }
+    catch(error){
+        document.getElementById("osztalyAtlag").textContent = `${error}`
+    }
 }
