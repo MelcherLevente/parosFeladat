@@ -41,25 +41,33 @@
             </tr>
         </thead>
         <tbody id="tablazatTorzs">
-            <tr>
-                <td class="tanulo_Nev"></td>
-                <td id="tanulo_Osztaly"></td>
-                <td id="tanulo_Atlag"></td>
-                <td><button onclick="modosit()">Módosítás</button></td>
-                <td><button onclick="torles()">Törlés</button></td>
-            </tr>
+            
         </tbody>
     </table>
     <p id="search-results"></p>
 
     <h1>Statisztikák</h1>
+
     <p id="letszam"></p>
-    <label for="osztaly">Melyik osztály átlagát mutassam?</label>
-    <input type="text" name="osztaly" id="osztaly" >
-    <button onclick="osztalyAtlag()">Mutasd</button><br>
+
+    <div>
+        <label for="osztaly">Melyik osztály átlagát mutassam?</label>
+        <input type="text" name="osztaly" id="osztaly" >
+        <button onclick="osztalyAtlag()">Mutasd</button><br>
+    </div>
+    
+    
     <p id="osztalyAtlag"></p>
 
     <p id="legjobbTanulo"></p>
+
+    <h1>Jegystatisztika</h1>
+    <p id="jeles"></p>
+    <p id="jo"></p>
+    <p id="kozepes"></p>
+    <p id="elegseges"></p>
+    <p id="elegtelen"></p>
+
 <script src="main.js"></script>
 </body>
 </html>
