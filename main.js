@@ -16,8 +16,8 @@ var tanulok=[{
 }]
 // search bar
 function searchbar(){
-    let searchinput=document.getElementById("search").value
-    searchinput=searchinput.toLowerCase();
+    let searchinput=document.getElementById("search").value.toLowerCase();
+    
     let searchnev=document.getElementById("tanulo_Nev");
 
     for(let i=0; i<searchnev.length;i++){
