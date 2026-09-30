@@ -14,21 +14,21 @@ var tanulok=[{
     atlag:"4,23"
 }]
 // search bar
-// function searchbar(){
-//     let searchinput=document.getElementById("search").value
-//     searchinput=searchinput.toLowerCase();
-//     let searchnev=document.getElementById("tanulo_Nev");
+function searchbar(){
+    let searchinput=document.getElementById("search").value.toLowerCase();
+    
+    let searchnev=document.getElementById("tanulo_Nev");
 
-//     for(let i=0; i<searchnev.length;i++){
-//         if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
-//             document.getElementById("search-results").innerHTML="Nem talált"
-//         }
-//         else{
-//             document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
-//         }
-//     }
-// }
-// searchbar();
+    for(let i=0; i<searchnev.length;i++){
+        if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
+            document.getElementById("search-results").innerHTML="Nem talált"
+        }
+        else{
+            document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
+        }
+    }
+}
+searchbar();
 
 // tablazatba toltes
 function betoltes(adat){
