@@ -15,7 +15,7 @@ body{
 #inputForm{
     text-align: center;
     font-size: large;
-    
+    justify-content: center;
 }
 #mentesBtn{
     margin: 10px;

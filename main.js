@@ -1,21 +1,21 @@
 var tanulok=[{
     nev:"Kiss Anna",
     osztaly:"12.D",
-    atlag:"3,5"
+    atlag:"3.5"
 },
 {
     nev: "Tóth Ervin",
     osztaly:"12.E",
-    atlag:"3,98"
+    atlag:"3.98"
 },
 {
     nev:"Kosztolányi Erzsi",
     osztaly: "11.D",
-    atlag:"4,23"
+    atlag:"4.23"
 }]
 // search bar
-function searchbar(){
-    let searchinput=document.getElementById("search").value.toLowerCase();
+// function searchbar(){
+//     let searchinput=document.getElementById("search").value.toLowerCase();
     
     let rows=document.getElementById("tablazatTorzs").rows;
     let talalatok=[];
@@ -38,11 +38,10 @@ function searchbar(){
     }
 
     
-}
+
 searchbar();
 
 // tablazatba toltes
-var inputForm = document.getElementById("inputForm")
 function betoltes(adat){
     try{
         const tablazatTorzs = document.getElementById("tablazatTorzs")
@@ -62,16 +61,21 @@ function betoltes(adat){
         // console.log(hiba.message)
     }
 
-    inputForm.addEventListener("submit", function(event){
-        event.preventDefault();
+    tablazatTorzs.innerHTML = tablazatSor
 
-        betoltes(tanulok)
+    letszamKiirasa()
 
-        inputokUritese()
-    })
+    document.getElementById("legjobbTanulo").textContent = `${legjobbTanulo()}`
 }
 
 betoltes(tanulok);
+
+let szerkesztesIndex = null
+
+document.getElementById("inputForm").addEventListener("submit", function(event){
+    event.preventDefault()
+    ujTanuloMentes()
+})
 
 function inputokUritese(){
     document.getElementById("nevInput").value = ""
@@ -87,8 +91,8 @@ function ujTanuloMentes(){
         let osztaly = document.getElementById("osztalyInput").value
         let atlag = document.getElementById("atlagInput").value
         let regexNev = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/
-        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[a-zA-Z]$/
-        let regexAtlag = /^(?:[1-4](?:,\d+)?|5(?:,0+)?)$/
+        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[A-Z]$/
+        let regexAtlag = /^(?:[1-4](?:\.\d+)?|5(?:\.0+)?)$/
 
         if(nev == ""){
             throw new Error("Add meg a tanuló nevét!")
@@ -103,20 +107,30 @@ function ujTanuloMentes(){
             throw new Error("Add meg a tanuló osztályát!")
         }
         else if(!regexAtlag.test(atlag)){
-            throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4,75, és 1-5 között kell lennie!")
+            throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4.75, és 1-5 között kell lennie!")
         }
         else{
-            tanulok.push({nev: `${nev}`, osztaly: `${osztaly}`, atlag: `${atlag}`})
+            const tanulo = {nev: nev, osztaly: osztaly, atlag: atlag}
+            if(szerkesztesIndex === null){
+                tanulok.push(tanulo)
+            }
+            else{
+                tanulok[szerkesztesIndex] = tanulo
+                szerkesztesIndex = null
+            }
+            betoltes(tanulok)
+            document.getElementById("hiba").textContent = ""
         }
         inputokUritese()
     }
     catch(error){
-        document.getElementById("hiba").innerHTML = error
+        document.getElementById("hiba").textContent = error.message
     }
 }
 
 function modositas(index){
     const clickedTanulo = tanulok[index]
+    szerkesztesIndex = index
 
     document.getElementById("nevInput").value = `${clickedTanulo.nev}`
     document.getElementById("osztalyInput").value = `${clickedTanulo.osztaly}`
@@ -127,5 +141,58 @@ function modositas(index){
 
 function torles(index){
     tanulok.splice(index, 1);
+    if(szerkesztesIndex === index){
+        szerkesztesIndex = null
+        inputokUritese()
+    }
+    else if(szerkesztesIndex !== null && szerkesztesIndex > index){
+        szerkesztesIndex--
+    }
     betoltes(tanulok)
 }
+
+function letszamKiirasa(){
+    document.getElementById("letszam").textContent = `Tanulók száma: ${tanulok.length}`
+}
+
+function osztalyAtlag(){
+    let osztaly = document.getElementById("osztaly").value
+    document.getElementById("osztaly").value = ""
+    try{
+        let atlagok = 0;
+        let letszam = 0;
+        tanulok.map((tanulo) => {
+            if(tanulo.osztaly == osztaly){
+                atlagok += Number(tanulo.atlag)
+                letszam++
+            }
+        })
+        if(atlagok == 0){
+            throw new Error("Nincs ilyen osztályú tanuló!")
+        }
+        else{
+            document.getElementById("osztalyAtlag").textContent = `A(z) ${osztaly} osztály átlaga: ${String(atlagok/letszam)}`
+        }
+    }
+    catch(error){
+        document.getElementById("osztalyAtlag").textContent = `${error}`
+    }
+}
+
+function legjobbTanulo(){
+    if(tanulok.length === 0){
+        return "Nincs tanuló a listában."
+    }
+
+    let legjobbAtlag = 0
+    let legjobbIndex = -1
+    tanulok.map((tanulo, index) => {
+        const atlag = Number(tanulo.atlag)
+        if(atlag > legjobbAtlag){
+            legjobbAtlag = atlag
+            legjobbIndex = index
+        }
+    })
+    return `Legjobb tanuló: ${tanulok[legjobbIndex].nev} - (${legjobbAtlag})`
+}
+
