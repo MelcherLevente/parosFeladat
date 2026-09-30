@@ -14,53 +14,45 @@ var tanulok=[{
     atlag:"4,23"
 }]
 // search bar
-function searchbar(){
-    let searchinput=document.getElementById("search").value
-    searchinput=searchinput.toLowerCase();
-    let searchnev=document.getElementById("tanulo_Nev");
+// function searchbar(){
+//     let searchinput=document.getElementById("search").value
+//     searchinput=searchinput.toLowerCase();
+//     let searchnev=document.getElementById("tanulo_Nev");
 
-    for(let i=0; i<searchnev.length;i++){
-        if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
-            document.getElementById("search-results").innerHTML="Nem talált"
-        }
-        else{
-            document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
-        }
-    }
-}
-searchbar();
+//     for(let i=0; i<searchnev.length;i++){
+//         if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
+//             document.getElementById("search-results").innerHTML="Nem talált"
+//         }
+//         else{
+//             document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
+//         }
+//     }
+// }
+// searchbar();
 
 // tablazatba toltes
-var inputForm = document.getElementById("inputForm")
 function betoltes(adat){
-    try{
-        const tablazatTorzs = document.getElementById("tablazatTorzs")
-        const tablazatSor = adat.map((tanulo, index) => `
-            <tr>
-                <td>${tanulo.nev}</td>
-                <td>${tanulo.osztaly}</td>
-                <td>${tanulo.atlag}</td>
-                <td><button id="modBtn" onclick="modositas(${index})">Módosítás</button></td>
-                <td><button id="torlesBtn" onclick="torles(${index})">Törlés</button></td>
-            </tr>`).join('')
-            
-        tablazatTorzs.innerHTML = tablazatSor
-    }
-    catch(hiba){
-        // document.getElementById("hiba").innerHTML="Hiba" + hiba.message
-        // console.log(hiba.message)
-    }
+    const tablazatTorzs = document.getElementById("tablazatTorzs")
+    const tablazatSor = adat.map((tanulo, index) => `
+        <tr>
+            <td>${tanulo.nev}</td>
+            <td>${tanulo.osztaly}</td>
+            <td>${tanulo.atlag}</td>
+            <td><button type="button" onclick="modositas(${index})">Módosítás</button></td>
+            <td><button type="button" onclick="torles(${index})">Törlés</button></td>
+        </tr>`).join('')
 
-    inputForm.addEventListener("submit", function(event){
-        event.preventDefault();
-
-        betoltes(tanulok)
-
-        inputokUritese()
-    })
+    tablazatTorzs.innerHTML = tablazatSor
 }
 
 betoltes(tanulok);
+
+let szerkesztesIndex = null
+
+document.getElementById("inputForm").addEventListener("submit", function(event){
+    event.preventDefault()
+    ujTanuloMentes()
+})
 
 function inputokUritese(){
     document.getElementById("nevInput").value = ""
@@ -95,17 +87,27 @@ function ujTanuloMentes(){
             throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4,75, és 1-5 között kell lennie!")
         }
         else{
-            tanulok.push({nev: `${nev}`, osztaly: `${osztaly}`, atlag: `${atlag}`})
+            const tanulo = {nev: nev, osztaly: osztaly, atlag: atlag}
+            if(szerkesztesIndex === null){
+                tanulok.push(tanulo)
+            }
+            else{
+                tanulok[szerkesztesIndex] = tanulo
+                szerkesztesIndex = null
+            }
+            betoltes(tanulok)
+            document.getElementById("hiba").textContent = ""
         }
         inputokUritese()
     }
     catch(error){
-        document.getElementById("hiba").innerHTML = error
+        document.getElementById("hiba").textContent = error.message
     }
 }
 
 function modositas(index){
     const clickedTanulo = tanulok[index]
+    szerkesztesIndex = index
 
     document.getElementById("nevInput").value = `${clickedTanulo.nev}`
     document.getElementById("osztalyInput").value = `${clickedTanulo.osztaly}`
@@ -116,5 +118,12 @@ function modositas(index){
 
 function torles(index){
     tanulok.splice(index, 1);
+    if(szerkesztesIndex === index){
+        szerkesztesIndex = null
+        inputokUritese()
+    }
+    else if(szerkesztesIndex !== null && szerkesztesIndex > index){
+        szerkesztesIndex--
+    }
     betoltes(tanulok)
 }
