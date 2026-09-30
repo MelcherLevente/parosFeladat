@@ -45,6 +45,8 @@ function betoltes(adat){
     tablazatTorzs.innerHTML = tablazatSor
 
     letszamKiirasa()
+
+    document.getElementById("legjobbTanulo").textContent = `${legjobbTanulo()}`
 }
 
 betoltes(tanulok);
@@ -157,3 +159,21 @@ function osztalyAtlag(){
         document.getElementById("osztalyAtlag").textContent = `${error}`
     }
 }
+
+function legjobbTanulo(){
+    if(tanulok.length === 0){
+        return "Nincs tanuló a listában."
+    }
+
+    let legjobbAtlag = 0
+    let legjobbIndex = -1
+    tanulok.map((tanulo, index) => {
+        const atlag = Number(tanulo.atlag)
+        if(atlag > legjobbAtlag){
+            legjobbAtlag = atlag
+            legjobbIndex = index
+        }
+    })
+    return `Legjobb tanuló: ${tanulok[legjobbIndex].nev} - (${legjobbAtlag})`
+}
+
