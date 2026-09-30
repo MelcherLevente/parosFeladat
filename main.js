@@ -17,24 +17,35 @@ var tanulok=[{
 // function searchbar(){
 //     let searchinput=document.getElementById("search").value.toLowerCase();
     
-//     let searchnev=document.getElementById("tanulo_Nev");
+    let rows=document.getElementById("tablazatTorzs").rows;
+    let talalatok=[];
 
-//     for(let i=0; i<searchnev.length;i++){
-//         if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
-//             document.getElementById("search-results").innerHTML="Nem talált"
-//         }
-//         else{
-//             document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
-//         }
-//     }
-// }
-// searchbar();
+    for(let i=0; i<rows.length;i++){
+        let namecell=rows[i].getElementsByClassName("tanulo_Nev")[0];
+        if(namecell){
+             let nametext=namecell.textContent.toLowerCase();
+             if(nametext.includes(searchinput)){
+                rows[i].style.display="";
+                if(searchinput!==""){
+                    talalatok.push(namecell.textContent);
+                }
+             } else {
+                rows[i].style.display="none";
+             }
+        } else {
+            rows[i].style.display="none"
+        }
+    }
+
+    
+
+searchbar();
 
 // tablazatba toltes
 function betoltes(adat){
     const tablazatTorzs = document.getElementById("tablazatTorzs")
     const tablazatSor = adat.map((tanulo, index) => `
-        <tr style='background-color: ${jelesVagyElegtelen()}'>
+        <tr>
             <td>${tanulo.nev}</td>
             <td>${tanulo.osztaly}</td>
             <td>${tanulo.atlag}</td>
