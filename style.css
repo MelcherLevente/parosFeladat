@@ -26,6 +26,16 @@ body{
     border: 0px;
     border-radius: 10px;
 }
+
+#hiba{
+    color: red;
+}
+#modBtn, #torlesBtn{
+    width: 100%;
+    height: 30px;
+    margin: 0;
+    vertical-align: middle;
+}
 .search-box{
     position: relative;
     width: 300px;

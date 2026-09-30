@@ -7,7 +7,6 @@ var tanulok=[{
     nev: "Tóth Ervin",
     osztaly:"12.E",
     atlag:"3,98"
-
 },
 {
     nev:"Kosztolányi Erzsi",
@@ -36,14 +35,15 @@ var inputForm = document.getElementById("inputForm")
 function betoltes(adat){
     try{
         const tablazatTorzs = document.getElementById("tablazatTorzs")
-        const tablazatSor = adat.map(tanulo => `
+        const tablazatSor = adat.map((tanulo, index) => `
             <tr>
                 <td>${tanulo.nev}</td>
                 <td>${tanulo.osztaly}</td>
                 <td>${tanulo.atlag}</td>
-                <td>${tanulo.atlag}</td>
-                <td>${tanulo.atlag}</td>
+                <td><button id="modBtn" onclick="modositas(${index})">Módosítás</button></td>
+                <td><button id="torlesBtn" onclick="torles(${index})">Törlés</button></td>
             </tr>`).join('')
+            
         tablazatTorzs.innerHTML = tablazatSor
     }
     catch(hiba){
@@ -53,8 +53,6 @@ function betoltes(adat){
 
     inputForm.addEventListener("submit", function(event){
         event.preventDefault();
-        
-        ujTanuloMentes()
 
         betoltes(tanulok)
 
@@ -104,4 +102,19 @@ function ujTanuloMentes(){
     catch(error){
         document.getElementById("hiba").innerHTML = error
     }
+}
+
+function modositas(index){
+    const clickedTanulo = tanulok[index]
+
+    document.getElementById("nevInput").value = `${clickedTanulo.nev}`
+    document.getElementById("osztalyInput").value = `${clickedTanulo.osztaly}`
+    document.getElementById("atlagInput").value = `${clickedTanulo.atlag}`
+
+
+}
+
+function torles(index){
+    tanulok.splice(index, 1);
+    betoltes(tanulok)
 }
