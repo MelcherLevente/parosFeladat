@@ -17,15 +17,31 @@ var tanulok=[{
 function searchbar(){
     let searchinput=document.getElementById("search").value.toLowerCase();
     
-    let searchnev=document.getElementById("tanulo_Nev");
+    let rows=document.getElementById("tablazatTorzs").rows;
+    let talalat=false;
 
-    for(let i=0; i<searchnev.length;i++){
-        if(!searchnev[i].innerHTML.toLowerCase().includes(searchinput)){
-            document.getElementById("search-results").innerHTML="Nem talált"
+    for(let i=0; i<rows.length;i++){
+        let namecell=rows[i].getElementsByClassName("tanulo_Nev")[0];
+        if(namecell){
+             let nametext=namecell.textContent.toLowerCase();
+             if(nametext.includes(searchinput)){
+                rows[i].style.display=""
+                talalat=true
+             }
         }
         else{
-            document.getElementById("search-results").innerHTML.searchnev[i]=searchnev[i]
+            rows[i].style.display="none"
         }
+        
+            
+        
+    }
+    let resultsDiv=document.getElementById("search-results");
+    if(!talalat && searchinput!==""){
+        resultsDiv.innerHTML="Nincs találat!"
+    }
+    else{
+        resultsDiv.innerHTML="";
     }
 }
 searchbar();
