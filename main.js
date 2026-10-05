@@ -90,9 +90,9 @@ function ujTanuloMentes(){
         let nev = document.getElementById("nevInput").value
         let osztaly = (document.getElementById("osztalyInput").value).toUpperCase()
         let atlag = document.getElementById("atlagInput").value
-        let regexNev = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/
+        let regexNev = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ]+( [a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ]+)*$/
         let regexOsztaly = /^(?:[1-9]|1[0-2])\.[a-zA-Z]$/
-        let regexAtlag = /^(?:[1-4](?:\.\d+)?|5(?:\.0+)?)$/
+        let regexAtlag = /^(?:[1-4](?:[.,]\d{1,2})?|5(?:[.,]0{1,2})?)$/
 
         if(nev == ""){
             throw new Error("Add meg a tanuló nevét!")
@@ -106,11 +106,14 @@ function ujTanuloMentes(){
         else if(osztaly == ""){
             throw new Error("Add meg a tanuló osztályát!")
         }
+        else if(atlag == ""){
+            throw new Error("Add meg a tanuló átlagát!")
+        }
         else if(!regexAtlag.test(atlag)){
-            throw new Error("Az átlag helyes formátuma: pl: 3 vagy 4.75, és 1-5 között kell lennie!")
+            throw new Error("Maximum 2 tizedesjegyű számot adhatsz meg, és az átlag 1-5 között lehet!")
         }
         else{
-            const tanulo = {nev: nev, osztaly: osztaly, atlag: atlag}
+            const tanulo = {nev: nev, osztaly: osztaly, atlag: atlag.replace(",", ".")}
             if(szerkesztesIndex === null){
                 tanulok.push(tanulo)
             }
