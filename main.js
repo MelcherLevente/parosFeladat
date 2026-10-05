@@ -32,6 +32,16 @@ var tanulok=[{
 
 searchbar();
 
+function rendezesAtlag(){
+    tanulok.sort((a,b) => b.atlag - a.atlag);
+    betoltes(tanulok);
+}
+
+function rendezesNev(){
+    tanulok.sort((a,b) => a.nev.localeCompare(b.nev));
+    betoltes(tanulok);
+}
+
 // tablazatba toltes
 function betoltes(adat){
     const tablazatTorzs = document.getElementById("tablazatTorzs")
