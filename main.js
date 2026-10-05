@@ -88,10 +88,10 @@ function inputokUritese(){
 function ujTanuloMentes(){
     try{
         let nev = document.getElementById("nevInput").value
-        let osztaly = document.getElementById("osztalyInput").value
+        let osztaly = (document.getElementById("osztalyInput").value).toUpperCase()
         let atlag = document.getElementById("atlagInput").value
         let regexNev = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ ]+$/
-        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[A-Z]$/
+        let regexOsztaly = /^(?:[1-9]|1[0-2])\.[a-zA-Z]$/
         let regexAtlag = /^(?:[1-4](?:\.\d+)?|5(?:\.0+)?)$/
 
         if(nev == ""){
@@ -156,7 +156,7 @@ function letszamKiirasa(){
 }
 
 function osztalyAtlag(){
-    let osztaly = document.getElementById("osztaly").value
+    let osztaly = (document.getElementById("osztaly").value).toUpperCase()
     document.getElementById("osztaly").value = ""
     try{
         let atlagok = 0;
