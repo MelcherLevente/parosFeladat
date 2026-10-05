@@ -34,6 +34,11 @@ function searchbar(){
     }
 searchbar();
 
+function kitunok(){
+    let kitunoTanulok = tanulok.filter(tanulo => Number(tanulo.atlag) >= 4.5);
+    betoltes(kitunoTanulok);
+}
+
 function rendezesAtlag(){
     tanulok.sort((a,b) => b.atlag - a.atlag);
     betoltes(tanulok);
@@ -48,7 +53,7 @@ function rendezesNev(){
 function betoltes(adat){
     const tablazatTorzs = document.getElementById("tablazatTorzs")
     const tablazatSor = adat.map((tanulo, index) => `
-        <tr>
+        <tr style="background-color: ${jelesVagyElegtelen(tanulo)}">
             <td>${tanulo.nev}</td>
             <td>${tanulo.osztaly}</td>
             <td>${tanulo.atlag}</td>
@@ -231,10 +236,11 @@ function jegyStatisztika(){
     }
 }
 
-function jelesVagyElegtelen(){
-    tanulok.map((tanulo) => {
-        if(tanulo.atlag>=4.5){
-            return "green"
+function jelesVagyElegtelen(tanulo){
+    if(tanulo.atlag>=4.5){
+        return 'green'
+    }
+    else if(tanulo.atlag<2){
+            return 'red'
         }
-    })
-}
+    }

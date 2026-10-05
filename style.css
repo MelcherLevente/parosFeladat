@@ -23,7 +23,7 @@ button{
     padding: 8px;
     background-color: green;
     color: white;
-    border: 0px;
+    border: 2px solid black;
     border-radius: 10px;
 }
 
