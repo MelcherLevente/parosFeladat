@@ -14,8 +14,8 @@ var tanulok=[{
     atlag:"4.23"
 }]
 // search bar
-// function searchbar(){
-//     let searchinput=document.getElementById("search").value.toLowerCase();
+    function searchbar(){
+    let searchinput=document.getElementById("search").value.toLowerCase();
     
     let rows=document.getElementById("tablazatTorzs").rows;
     let talalatok=[];
@@ -36,6 +36,7 @@ var tanulok=[{
             rows[i].style.display="none"
         }
     }
+}
 
     
 
