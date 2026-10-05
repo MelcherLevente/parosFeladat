@@ -17,7 +17,7 @@ body{
     font-size: large;
     justify-content: center;
 }
-#mentesBtn{
+button{
     margin: 10px;
     font-size: 20px;
     padding: 8px;

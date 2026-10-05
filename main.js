@@ -14,7 +14,7 @@ var tanulok=[{
     atlag:"4.7"
 }]
 // search bar
-    function searchbar(){
+function searchbar(){
     let searchinput=document.getElementById("search").value.toLowerCase();
     
     let rows=document.getElementById("tablazatTorzs").rows;
@@ -38,9 +38,17 @@ var tanulok=[{
     }
 }
 
-    
-
 searchbar();
+
+function rendezesAtlag(){
+    tanulok.sort((a,b) => b.atlag - a.atlag);
+    betoltes(tanulok);
+}
+
+function rendezesNev(){
+    tanulok.sort((a,b) => a.nev.localeCompare(b.nev));
+    betoltes(tanulok);
+}
 
 // tablazatba toltes
 function betoltes(adat){
