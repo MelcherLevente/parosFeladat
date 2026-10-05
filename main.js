@@ -20,7 +20,7 @@ var tanulok=[{
 
     for (const row of rows) {
         const name = row.cells[0].textContent.toLowerCase();
-
+        
         if (name.includes(searchinput)) {
             row.style.display = "";
         } else {
