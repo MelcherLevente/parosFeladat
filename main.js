@@ -1,7 +1,7 @@
 var tanulok=[{
     nev:"Kiss Anna",
     osztaly:"12.D",
-    atlag:"3.5"
+    atlag:"1"
 },
 {
     nev: "Tóth Ervin",
@@ -11,7 +11,7 @@ var tanulok=[{
 {
     nev:"Kosztolányi Erzsi",
     osztaly: "11.D",
-    atlag:"4.23"
+    atlag:"4.7"
 }]
 // search bar
     function searchbar(){
@@ -44,29 +44,23 @@ searchbar();
 
 // tablazatba toltes
 function betoltes(adat){
-    try{
-        const tablazatTorzs = document.getElementById("tablazatTorzs")
-        const tablazatSor = adat.map((tanulo, index) => `
-            <tr>
-                <td class="tanulo_Nev">${tanulo.nev}</td>
-                <td>${tanulo.osztaly}</td>
-                <td>${tanulo.atlag}</td>
-                <td><button id="modBtn" onclick="modositas(${index})">Módosítás</button></td>
-                <td><button id="torlesBtn" onclick="torles(${index})">Törlés</button></td>
-            </tr>`).join('')
-            
-        tablazatTorzs.innerHTML = tablazatSor
-    }
-    catch(hiba){
-        // document.getElementById("hiba").innerHTML="Hiba" + hiba.message
-        // console.log(hiba.message)
-    }
+    const tablazatTorzs = document.getElementById("tablazatTorzs")
+    const tablazatSor = adat.map((tanulo, index) => `
+        <tr>
+            <td>${tanulo.nev}</td>
+            <td>${tanulo.osztaly}</td>
+            <td>${tanulo.atlag}</td>
+            <td><button type="button" onclick="modositas(${index})">Módosítás</button></td>
+            <td><button type="button" onclick="torles(${index})">Törlés</button></td>
+        </tr>`).join('')
 
     tablazatTorzs.innerHTML = tablazatSor
 
     letszamKiirasa()
 
     document.getElementById("legjobbTanulo").textContent = `${legjobbTanulo()}`
+
+    jegyStatisztika()
 }
 
 betoltes(tanulok);
@@ -197,3 +191,48 @@ function legjobbTanulo(){
     return `Legjobb tanuló: ${tanulok[legjobbIndex].nev} - (${legjobbAtlag})`
 }
 
+function jegyStatisztika(){
+    let jeles = 0
+    let jo = 0
+    let kozepes = 0
+    let elegseges = 0
+    let elegtelen = 0
+
+    for(let i = 0; i < tanulok.length; i++){
+        let atlag = tanulok[i].atlag
+        if(atlag >= 4.5){
+            jeles++
+        }
+        else if(atlag>=3.5 && atlag<4.5){
+            jo++
+        }
+        else if(atlag>=2.5 && atlag<3.5){
+            kozepes++
+        }
+        else if(atlag>=2 && atlag<2.5){
+            elegseges++
+        }
+        else if(atlag<2){
+            elegtelen++
+        }
+
+        if(tanulok.length == 0){
+            document.getElementById("jeles").textContent = "Nincs tanuló a listában"
+        }
+        else{
+            document.getElementById("jeles").textContent = `Jeles: ${jeles} fő`
+            document.getElementById("jo").textContent = `Jó: ${jo} fő`
+            document.getElementById("kozepes").textContent = `Közepes: ${kozepes} fő`
+            document.getElementById("elegseges").textContent = `Elégséges: ${elegseges} fő`
+            document.getElementById("elegtelen").textContent = `Elégtelen: ${elegtelen} fő`
+        }
+    }
+}
+
+function jelesVagyElegtelen(){
+    tanulok.map((tanulo) => {
+        if(tanulo.atlag>=4.5){
+            return "green"
+        }
+    })
+}
