@@ -15,30 +15,31 @@ var tanulok=[{
 }]
 // search bar
     function searchbar(){
-    let searchinput=document.getElementById("search").value.toLowerCase();
+  
     
-    let rows=document.getElementById("tablazatTorzs").rows;
-    let talalatok=[];
 
-    for(let i=0; i<rows.length;i++){
+    let searchinput=document.getElementById("search").value.toLowerCase();
+    let rows=document.getElementById("tablazatTorzs").rows;
+      let talalatok=[];
+     for(let i=0; i<rows.length;i++){
         let namecell=rows[i].getElementsByClassName("tanulo_Nev")[0];
         if(namecell){
              let nametext=namecell.textContent.toLowerCase();
              if(nametext.includes(searchinput)){
-                rows[i].style.display="";
-                if(searchinput!==""){
+              if(searchinput!==""){
                     talalatok.push(namecell.textContent);
                 }
              } else {
                 rows[i].style.display="none";
-             }
-        } else {
-            rows[i].style.display="none"
-        }
+        
+            
+        
     }
-}
 
     
+}
+}
+}  
 
 searchbar();
 
