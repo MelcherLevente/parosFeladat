@@ -14,24 +14,22 @@ var tanulok=[{
     atlag:"4.7"
 }]
 // search bar
-function searchbar(){
-    let searchinput=document.getElementById("search").value.toLowerCase();
-    let rows=document.getElementById("tablazatTorzs").rows;
-      let talalatok=[];
-     for(let i=0; i<rows.length;i++){
-        let namecell=rows[i].getElementsByClassName("tanulo_Nev")[0];
-        if(namecell){
-             let nametext=namecell.textContent.toLowerCase();
-             if(nametext.includes(searchinput)){
-              if(searchinput!==""){
-                    talalatok.push(namecell.textContent);
-                }
-             } else {
-                rows[i].style.display="none";
-                }
-            }
+    function searchbar() {
+    const searchinput = document.getElementById("search").value.toLowerCase();
+    const rows = document.getElementById("tablazatTorzs").rows;
+
+    for (const row of rows) {
+        const name = row.cells[0].textContent.toLowerCase();
+
+        if (name.includes(searchinput)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
         }
     }
+}
+  
+
 searchbar();
 
 function kitunok(){
